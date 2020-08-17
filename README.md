@@ -2,6 +2,6 @@
 Tool that scans the warframe.market API to retrieve the platinum price (lowest to highest) of valid items from listings by users that are both selling and have set their status to in-game
 
 1) User inputs search item, if the response it valid:
-2) Json file is parsed and the relevant data (such as the username of the player selling, the quantity, the price of the item (+ the mod rank in applicable cases) and the URL for the players profile)
+2) Json file is parsed and the relevant data (such as the username of the player selling, the quantity, the price of the item (+ the mod rank in applicable cases) and the URL for the players profile is printed.
 
-Otherwise an error is printed and the user can try again
+Otherwise an error is reported and the user can try again
