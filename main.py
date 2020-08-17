@@ -17,10 +17,10 @@ def WFMarket_search_ingame_seller():
             online_request = requests.get(online_URL)
             online_json = online_request.json()
 
-            # Sorts all values in json response from lowest to highest 'platinum'
+            # Sorts all values in json response from lowest to highest 'platinum' for easy interpretation
             for val in sorted(online_json["payload"]["orders"], key=lambda x:int(x['platinum'])):
 
-                # Ignores 'offline' and 'online' response to ["status"] and also ignores "buy" orders and only prints "sell" orders (users that are selling and are currently ingame)
+                # Only prints the listings from users that are ingame and are selling the searched item
                 if val["user"]["status"] == "ingame" and val["order_type"] == "sell":
                     
                     username = val["user"]["ingame_name"]
@@ -28,7 +28,7 @@ def WFMarket_search_ingame_seller():
                     quantity = int(val["quantity"])
                     profile_URL = 'https://warframe.market/profile/' + username
 
-                    # If 'mod_rank' is present in the .json response, the item is assumed to be a mod
+                    # If 'mod_rank' is present in the online_json the item is assumed to be a mod
                     if "mod_rank" in val:
                         rank = int(val["mod_rank"])
                         print(username, 'is selling ',  str(quantity), ' at rank ', str(rank), ' for ',  str(plat_price) , ' Platinum each.',  ' '*30,  profile_URL) 
@@ -37,13 +37,13 @@ def WFMarket_search_ingame_seller():
                     else:
                         print(username, ' is selling ', str(quantity), ' for ', str(plat_price), ' Platinum each.',  ' '*30, profile_URL)
 
-            # Waits for 334ms before taking another request (TOU limitation of 3 requests per second)
+            # Waits for 334ms before taking another request (limitation of 3 requests per second)
             time.sleep(334/1000)
             WFMarket_search_ingame_seller()
 
-        # Key error, if item is not a valid listing on warframe.market error is returned
+        # If the item is not a valid listing on warframe.market a key error is returned
         except KeyError:
-            print("Invalid Item - Please check the spelling or enter a valid (and tradable) Warframe item ('Frost Prime Systems', 'Axi L1 Intact', 'Dead Eye')")
+            print("Invalid Item - Please check the spelling or enter a valid (and tradable) Warframe item ('Frost Prime Systems', 'Axi L4 Intact', 'Dead Eye')")
             time.sleep(334/1000)
             WFMarket_search_ingame_seller()
 
