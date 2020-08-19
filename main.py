@@ -37,7 +37,7 @@ def WFMarket_search_ingame_seller():
                     else:
                         print(username, ' is selling ', str(quantity), ' for ', str(plat_price), ' Platinum each.',  ' '*30, profile_URL)
 
-            # Waits for 334ms before taking another request (limitation of 3 requests per second)
+            # Waits for 334ms before taking another request (limitation of 3 requests/second)
             time.sleep(334/1000)
             WFMarket_search_ingame_seller()
 
