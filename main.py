@@ -11,13 +11,17 @@ def WFMarket_search_ingame_seller():
         try:
             print('Search for an item on warframe.market: ')
             search = input()
-            print('Searching for listings of ' + string.capwords(search) + '....' )
+            item_url = 'https://warframe.market/items/' + search.replace(' ', '_')
+
+            # Prints the search item for QoL
+            print('Searching for listings of ' + string.capwords(search),'... (' + item_url + ')')
+            print('')
 
             online_URL = 'https://api.warframe.market/v1/items/' + search.replace(' ', '_') + '/orders'
             online_request = requests.get(online_URL)
             online_json = online_request.json()
 
-            # Sorts all values in json response from lowest to highest 'platinum' for easy interpretation
+            # Sorts all values in json response from lowest to highest 'platinum' for easy interpretation within the console
             for val in sorted(online_json["payload"]["orders"], key=lambda x:int(x['platinum'])):
 
                 # Only prints the listings from users that are ingame and are selling the searched item
@@ -27,17 +31,18 @@ def WFMarket_search_ingame_seller():
                     plat_price = int(val["platinum"])
                     quantity = int(val["quantity"])
                     profile_URL = 'https://warframe.market/profile/' + username
-
+    
                     # If 'mod_rank' is present in the online_json the item is assumed to be a mod
                     if "mod_rank" in val:
                         rank = int(val["mod_rank"])
-                        print(username, 'is selling ',  str(quantity), ' at rank ', str(rank), ' for ',  str(plat_price) , ' Platinum each.',  ' '*30,  profile_URL) 
+                        print(username, 'is selling ', str(quantity), 'at rank', str(rank), 'for', str(plat_price) , 'Platinum each.',' '*5,'(' + profile_URL + ')')
 
                     # If an item is not a mod, it must be a regular 'item'
                     else:
-                        print(username, ' is selling ', str(quantity), ' for ', str(plat_price), ' Platinum each.',  ' '*30, profile_URL)
+                        print(username, 'is selling', str(quantity), 'for', str(plat_price), 'Platinum each.',' '*5,'(' + profile_URL + ')')
 
             # Waits for 334ms before taking another request (limitation of 3 requests/second)
+            print('')
             time.sleep(334/1000)
             WFMarket_search_ingame_seller()
 
@@ -48,5 +53,3 @@ def WFMarket_search_ingame_seller():
             WFMarket_search_ingame_seller()
 
 WFMarket_search_ingame_seller()
-
-
