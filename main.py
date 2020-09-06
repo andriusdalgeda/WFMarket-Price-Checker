@@ -14,7 +14,7 @@ def WFMarket_search_ingame_seller():
             item_url = 'https://warframe.market/items/' + search.replace(' ', '_')
 
             # Prints the search item for QoL
-            print('Searching for listings of ' + string.capwords(search),'... (' + item_url + ')')
+            print('Searching for listings of ' + string.capwords(search) + '... (' + item_url + ')')
             print('')
 
             online_URL = 'https://api.warframe.market/v1/items/' + search.replace(' ', '_') + '/orders'
