@@ -46,7 +46,7 @@ def WFMarket_search_ingame_seller():
             # Waits for 334ms before taking another request (limitation of 3 requests/second)
             print('')
             time.sleep(334/1000)
-            WFMarket_search_ingame_seller
+            WFMarket_search_ingame_seller()
 
         # If the item is not a valid listing on warframe.market a key error is returned
         except KeyError:
