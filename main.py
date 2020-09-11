@@ -9,6 +9,7 @@ import time
 def WFMarket_search_ingame_seller():
     while True:
         try:
+            
             # User input
             print('Search for an item on warframe.market: ')
             search = input()
@@ -16,7 +17,10 @@ def WFMarket_search_ingame_seller():
 
             # Prints the search item for QoL
             print('Searching for listings of ' + string.capwords(search) + '... (' + item_url + ')','\n')
-            
+
+            # Start time for search
+            start = time.time()
+
             # Requests response from online_URL and parses json data
             online_URL = 'https://api.warframe.market/v1/items/' + search.replace(' ', '_') + '/orders'
             online_request = requests.get(online_URL)
@@ -43,8 +47,12 @@ def WFMarket_search_ingame_seller():
                     else:
                         print(username, 'is selling', str(quantity), 'for', str(plat_price), 'Platinum each.',' '*5,'(' + profile_URL + ')')
 
-            # Waits for 334ms before taking another request (limitation of 3 requests/second)
+            # Prints time taken to complete request
             print('')
+            print('The request took', time.time()-start, 'seconds')
+            print('')
+
+            # Waits for 334ms before taking another request (limitation of 3 requests/second)
             time.sleep(334/1000)
             WFMarket_search_ingame_seller()
 
