@@ -48,9 +48,7 @@ def WFMarket_search_ingame_seller():
                         print(username, 'is selling', str(quantity), 'for', str(plat_price), 'Platinum each.',' '*5,'(' + profile_URL + ')')
 
             # Prints time taken to complete request
-            print('')
-            print('The request took', time.time()-start, 'seconds')
-            print('')
+            print('\n','The request took', time.time()-start, 'seconds','\n')
 
             # Waits for 334ms before taking another request (limitation of 3 requests/second)
             time.sleep(334/1000)
