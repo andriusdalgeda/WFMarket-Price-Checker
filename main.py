@@ -41,14 +41,14 @@ def WFMarket_search_ingame_seller():
                     # If 'mod_rank' is present in the online_json the item is assumed to be a 'mod'
                     if "mod_rank" in val:
                         rank = int(val["mod_rank"])
-                        print(username, 'is selling ', str(quantity), 'at rank', str(rank), 'for', str(plat_price) , 'Platinum each.',' '*5,'(' + profile_URL + ')')
+                        print(username,'is selling ',str(quantity),'at rank', str(rank),'for',str(plat_price) ,'Platinum each.',''*5,'(' + profile_URL + ')')
                         
                     # If an item is not a mod, its assumed to be a regular 'item'
                     else:
-                        print(username, 'is selling', str(quantity), 'for', str(plat_price), 'Platinum each.',' '*5,'(' + profile_URL + ')')
+                        print(username,'is selling',str(quantity),'for',str(plat_price),'Platinum each.',''*5,'(' + profile_URL + ')')
 
             # Prints time taken to complete request
-            print('\n','The request took', time.time()-start, 'seconds','\n')
+            print('\n' + 'The request took', time.time()-start,'seconds','\n')
 
             # Waits for 334ms before taking another request (limitation of 3 requests/second)
             time.sleep(334/1000)
